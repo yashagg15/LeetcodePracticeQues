@@ -107,28 +107,30 @@ class GfG {
 
 class Tree {
     
-    List<Integer> list;
-    public void fillList(Node root){
-        
-        if(root==null)
-         return;
-        fillList(root.left);
-        list.add(root.data);
-        fillList(root.right);
-        return;
-        
-    }
+    int ans=-1;
+    
     // Function to return the ceil of given number in BST.
     int findCeil(Node root, int key) {
         
-        list=new ArrayList<>();
-        fillList(root);
-        for(int num:list){
-            if(num>=key){
-                return num;
-            }
+        if(root==null){
+            return ans;
         }
-        return -1;
+        
+        if(root.data==key){
+            ans=root.data;
+            return ans;
+        }
+        
+        if(root.data>key){
+            ans=root.data;
+            return findCeil(root.left,key);
+        }
+        
+        if(root.data<key){
+            return findCeil(root.right,key);
+        }
+        
+        return ans;
         
         
     }
